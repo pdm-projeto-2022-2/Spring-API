@@ -10,4 +10,18 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=pdmdev
     ports:
-      - "5432:5432" 
+      - "5432:5432"
+  api:
+    build:
+      dockerfile: API.Dockerfile
+      context: .
+      network: host
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - spring.datasource.url=jdbc:postgresql://db:5432/pdmdev
+      - spring.datasource.username=postgres
+      - spring.datasource.password=123123
+    ports:
+      - "8080:8080"

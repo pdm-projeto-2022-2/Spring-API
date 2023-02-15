@@ -46,6 +46,16 @@ public class DonationService {
         return allDonations;
     }
 
+    public void doDonation(Long donationId){
+        var donation = donationRepository.findById(donationId).orElseThrow();
+        donation.setStatus(Donation.DonationStatus.DONE);
+        donationRepository.save(donation);;
+    }
+
+    public void removeDonation(Long id){
+        donationRepository.deleteById(id);
+    }
+
     private Donor getDonorById(Long donorId){
         return donorRepository.findById(donorId)
                 .orElseThrow(()-> new EntityNotFoundException("Donor not found with id: "+donorId));

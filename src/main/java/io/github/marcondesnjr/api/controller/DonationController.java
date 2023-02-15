@@ -32,4 +32,16 @@ public class DonationController {
         return ResponseEntity.ok(list);
     }
 
+    @PatchMapping("/donations/{donationId}")
+    public ResponseEntity<?> doDonation(@PathVariable Long donationId){
+        donationService.doDonation(donationId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/donations/{donationId}")
+    public ResponseEntity<?> removeDonation(@PathVariable Long donationId){
+        donationService.removeDonation(donationId);
+        return ResponseEntity.ok().build();
+    }
+
 }
